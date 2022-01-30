@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+detox Bandcamp
+find Bandcamp -maxdepth 1 -name '*.zip' -exec sh -c 'unzip -d "${1%.*}" "$1"' _ {} \;
+rm -f Bandcamp/*.zip
+detox -r Bandcamp
+test -e Bandcamp/* && mv Bandcamp/* FLAC
